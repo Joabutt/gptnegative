@@ -8,6 +8,7 @@ var multer = require('multer');
 var upload = multer();
 const path = require('path');
 let text;
+const grammarify = require("grammarify");
 let resp;
 
 
@@ -48,8 +49,8 @@ app.use(upload.array());
 app.use(express.static('public'));
 
 app.get("/rewrite", async (req, res) => {
-  const final = await rewrite(text)
- 
+  const prefinal = await rewrite(text)
+  const final = grammarify.clean(prefinal)
   res.send(final)
 })
 
