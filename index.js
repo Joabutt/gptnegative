@@ -9,7 +9,7 @@ var upload = multer();
 const path = require('path');
 let text;
 let resp;
-var grammarify = require("grammarify")
+
 
 app.use(bodyParser.json());
 // for parsing application/xwww-
@@ -48,8 +48,8 @@ app.use(upload.array());
 app.use(express.static('public'));
 
 app.get("/rewrite", async (req, res) => {
-  const prefinal = await rewrite(text)
-  const final = grammarify.clean(prefinal)
+  const final = await rewrite(text)
+ 
   res.send(final)
 })
 
