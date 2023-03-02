@@ -33,7 +33,6 @@ app.post('/s', async function(req, res){
   text = posttext
   res.redirect(302, '/rewrite');
 
-  console.log(posttext)
   
 
 
@@ -54,6 +53,7 @@ app.get("/rewrite", async (req, res) => {
 })
 
 async function rewrite(text) {
+  console.log("started!")
   form.append('data', text.toString())
   const response = await axios.post(
     'https://spinbot.info/php/process.php',
