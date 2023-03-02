@@ -1,8 +1,6 @@
 require('dotenv').config();
 const express = require("express")
-var FormData = require('form-data');
 const axios = require('axios');
-var form = new FormData();
 const app = express()
 const port = parseInt(process.env.PORT) || 3000
 var bodyParser = require('body-parser');
@@ -10,6 +8,8 @@ var multer = require('multer');
 var upload = multer();
 const path = require('path');
 let text;
+let resp;
+var grammarify = require("grammarify")
 
 app.use(bodyParser.json());
 // for parsing application/xwww-
@@ -48,23 +48,34 @@ app.use(upload.array());
 app.use(express.static('public'));
 
 app.get("/rewrite", async (req, res) => {
-  const final = await rewrite(text)
+  const prefinal = await rewrite(text)
+  const final = grammarify.clean(prefinal)
   res.send(final)
 })
 
 async function rewrite(text) {
   console.log("started!")
-  form.append('data', text.toString())
-  const response = await axios.post(
-    'https://spinbot.info/php/process.php',
-    form,
-    {
-      headers: {
-        ...form.getHeaders(),
-        'content-type': 'multipart/form-data'
-      }
-    }
-  );
-  return response.data
+  
+
+const options = {
+  method: 'POST',
+  url: 'https://api.spinbot.com/spin/rewrite-text',
+  headers: {Origin: 'https://spinbot.com', 'Content-Type': 'application/json'},
+  data: {
+    text: text,
+    x_spin_cap_words: false
+  }
+};
+
+await axios.request(options).then(async function (response) {
+
+  resp = response.data
+}).catch(async function (error) {
+  console.error(error);
+});
+
+  return resp
+
+  
 }
 
