@@ -32,8 +32,7 @@ app.get('/', async function (req, res) {
 app.post('/s', async function(req, res){
   const pretext = req.body.text
   const posttext = pretext.replace(/(\r\n|\n|\r)/gm, "");
-  const cleaned = grammarify.clean(posttext)
-  text = cleaned
+  text = posttext
   res.redirect(302, '/rewrite');
 
   
