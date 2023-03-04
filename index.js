@@ -27,6 +27,10 @@ app.get('/', async function (req, res) {
   res.sendFile(path.join(__dirname, `/views/index.html`));
 })
 
+app.get('/about', async function (req, res) {
+  res.sendFile(path.join(__dirname, `/views/about.html`));
+})
+
 app.post('/api', async function (req, res) {
 
   const pretext = req.body.text
@@ -39,16 +43,6 @@ app.post('/api', async function (req, res) {
 
 })
 
-app.post('/s', async function(req, res){
-  const pretext = req.body.text
-  const posttext = pretext.replace(/(\r\n|\n|\r)/gm, "");
-  text = posttext
-  res.redirect(302, '/rewrite');
-
-  
-
-
-});
 
 
 
@@ -60,12 +54,6 @@ app.listen(port, () => {
 app.use(upload.array());
 app.use(express.static('public'));
 
-app.get("/rewrite", async (req, res) => {
-  const final = await rewrite(text)
-  console.log(final)
-
-  res.send(final)
-})
 
 async function rewrite(text) {
   console.log("started!")
