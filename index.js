@@ -9,6 +9,7 @@ var upload = multer();
 const path = require('path');
 let text;
 let resp;
+let finalresp;
 
 
 
@@ -31,13 +32,15 @@ app.get('/', async function (req, res) {
 app.post('/s', async function(req, res){
   const pretext = req.body.text
   const posttext = pretext.replace(/(\r\n|\n|\r)/gm, "");
-  text = posttext
+  const cleaned = grammarify.clean(posttext)
+  text = cleaned
   res.redirect(302, '/rewrite');
 
   
 
 
 });
+
 
 
 
@@ -72,11 +75,26 @@ const options = {
 await axios.request(options).then(async function (response) {
 
   resp = response.data
+  const options1 = {
+    method: 'POST',
+    url: 'https://apeironai-mainserver.onrender.com/',
+    headers: {'Content-Type': 'application/json'},
+    data: {
+      text: `Correct this to standard English, in terms of an editor for a book: ${resp}`
+    }
+  };
+  
+  await axios.request(options1).then(function (response2) {
+    finalresp = response2.data.result.choices[0].text
+    
+  }).catch(function (error) {
+    console.error(error);
+  });
 }).catch(async function (error) {
   console.error(error);
 });
 
-  return resp
+  return finalresp
 
   
 }
