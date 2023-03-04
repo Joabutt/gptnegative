@@ -1,28 +1,76 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>GPTnegative</title>
-  <link rel="stylesheet" href="./style.css">
-
+	<title>GPT Negative</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+	<script src="https://malsup.github.io/jquery.form.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="/style.css" />
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div id="wrapper">
-
-	<form id="paper" method="post" action="/s">
-
-		<div id="margin">GPTnegative - A GPTzero bypasser</div>
-		<textarea placeholder="baller" id="text" name="text" rows="4" style="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>  
-		<br>
-		<input id="button" type="submit" value="Submit!">
-		
+	<header>GPT NEGATIVE</header>
+	<form id="form" class="topBefore">
+		<textarea id="message" type="text" placeholder="Enter your text here"></textarea>
+		<input id="submit" type="submit" value="Submit!">
 	</form>
 
-</div>
-<!-- partial -->
-  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://static.tumblr.com/maopbtg/oimmiw86r/jquery.autosize-min.js'></script><script  src="./script.js"></script>
+	<footer> Made by <a href="https://joabutt.dev">Joabutt</a> • <a href="">Disclamer</a></footer>
+	<center>
+		<div id="output">loading...</div>
+		<br>
+		<button id="ctc" onclick="ctc()">Copy to Clipboard</button>
+	</center>
 
+	<script>
+		document.getElementById('output').style.display = "none";
+		document.getElementById('ctc').style.display = "none";
+		function ctc() {
+			// Get the text field
+			const copyText = document.createElement('textarea');
+			document.body.appendChild(copyText);
+			const div = document.getElementById("output")
+			copyText.value = div.innerText;
+			// Select the text field
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); // For mobile devices
+
+			// Copy the text inside the text field
+			document.execCommand('copy');
+
+			// Alert the copied text
+			alert("text copied to clipboard!");
+			document.body.removeChild(copyText);
+		}
+		
+
+		$(document).ready(function () {
+
+			$('#form').submit(async function (event) {
+				// prevent the form from submitting normally
+				const div = document.getElementById('output');
+				const btn = document.getElementById('ctc');
+				event.preventDefault();
+				// get the input text from the textarea
+				div.style.display = "block"
+
+				var dainputText = $('#message').val();
+				const inputText = JSON.stringify(dainputText).replace(/(\r\n|\n|\r)/gm, "");
+				// call the URL with the input text as a parameter
+				div.innerHTML = "loading...";
+				const results = await axios.post("/api", {
+					text: inputText
+				})
+				btn.style.display = 'block'
+
+				div.innerHTML = results.data;
+			})
+
+
+		});
+	</script>
 </body>
+
 </html>

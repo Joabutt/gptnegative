@@ -9,7 +9,7 @@ var upload = multer();
 const path = require('path');
 let text;
 let resp;
-let finalresp;
+
 
 
 
@@ -21,12 +21,22 @@ app.get('/style.css', async function(req, res){
   res.sendFile(path.join(__dirname, `/views/style.css`));
 })
 
-app.get('/script.js', async function(req, res){
-  res.sendFile(path.join(__dirname, `/views/script.js`));
-})
+
 
 app.get('/', async function (req, res) {
   res.sendFile(path.join(__dirname, `/views/index.html`));
+})
+
+app.post('/api', async function (req, res) {
+
+  const pretext = req.body.text
+  const posttext = pretext.replaceAll(/(\r\n|\n|\r)/gm, "");
+  text = posttext
+  const preeverfinal = await rewrite(text)
+  const final = preeverfinal.replaceAll(/(\r\n|\n|\r)/gm, "");
+  res.send(final)
+
+
 })
 
 app.post('/s', async function(req, res){
@@ -52,7 +62,7 @@ app.use(express.static('public'));
 
 app.get("/rewrite", async (req, res) => {
   const final = await rewrite(text)
-
+  console.log(final)
 
   res.send(final)
 })
@@ -74,26 +84,12 @@ const options = {
 await axios.request(options).then(async function (response) {
 
   resp = response.data
-  const options1 = {
-    method: 'POST',
-    url: 'https://apeironai-mainserver.onrender.com/',
-    headers: {'Content-Type': 'application/json'},
-    data: {
-      text: `Correct this to standard English, in terms of an editor for a book: ${resp}`
-    }
-  };
   
-  await axios.request(options1).then(function (response2) {
-    finalresp = response2.data.result.choices[0].text
-    
-  }).catch(function (error) {
-    console.error(error);
-  });
 }).catch(async function (error) {
   console.error(error);
 });
 
-  return finalresp
+  return resp
 
   
 }
