@@ -7,7 +7,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 	<script src="https://malsup.github.io/jquery.form.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<link rel="stylesheet" href="/style.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body>
@@ -17,16 +20,20 @@
 		<input id="submit" type="submit" value="Submit!">
 	</form>
 
-	<footer> Made by <a href="https://joabutt.dev">Joabutt</a> • <a href="https://github.com/Joabutt/gptnegative">Disclamer</a> • <a href="/about">About</a></footer>
+
 	<center>
+		<div id="timetaken">placeholder</div>
 		<div id="output">loading...</div>
 		<br>
 		<button id="ctc" onclick="ctc()">Copy to Clipboard</button>
 	</center>
 
+	<footer> Made by <a href="https://joabutt.dev">Joabutt</a> • <a
+			href="https://github.com/Joabutt/gptnegative">Disclamer</a> • <a href="/about">About</a></footer>
 	<script>
 		document.getElementById('output').style.display = "none";
 		document.getElementById('ctc').style.display = "none";
+		document.getElementById('timetaken').style.display = "none";
 		function ctc() {
 			// Get the text field
 			const copyText = document.createElement('textarea');
@@ -41,10 +48,18 @@
 			document.execCommand('copy');
 
 			// Alert the copied text
-			alert("text copied to clipboard!");
+			Toastify({
+				text: "🚀 Copied to clipboard!",
+				gravity: "top",
+				position: "center",
+				style: {
+					background: "#e2dedb"
+				}
+			}).showToast();
+
 			document.body.removeChild(copyText);
 		}
-		
+
 
 		$(document).ready(function () {
 
@@ -52,6 +67,7 @@
 				// prevent the form from submitting normally
 				const div = document.getElementById('output');
 				const btn = document.getElementById('ctc');
+				const ttk = document.getElementById('timetaken');
 				event.preventDefault();
 				// get the input text from the textarea
 				div.style.display = "block"
@@ -59,13 +75,17 @@
 				var dainputText = $('#message').val();
 				const inputText = JSON.stringify(dainputText).replace(/(\r\n|\n|\r)/gm, "");
 				// call the URL with the input text as a parameter
-				div.innerHTML = "loading...";
+				div.innerHTML = "loading... (Average generation time is ~5s)";
 				const results = await axios.post("/api", {
 					text: inputText
 				})
 				btn.style.display = 'block'
-
-				div.innerHTML = results.data;
+				ttk.style.display = 'block'
+				ttk.innerHTML = "Generation time: " + results.data.time
+				const preresult1 = results.data.text.replaceAll('"', "");
+				const preresult2 = preresult1.replaceAll("\\n\\n", " ");
+				const finalresult = preresult2.trim()
+				div.innerHTML = finalresult
 			})
 
 
