@@ -5,7 +5,7 @@ https://gptneg.xyz
 Disclaimer: The software mentioned is for educational and research purposes only. We do not condone the use of this software to circumvent ChatGPT's detection system for malicious or illegal activities. The developers of this software are not responsible for any damages or legal issues that may arise from the use of this software. Users are solely responsible for their actions and should use this software at their own risk. The developers of this software do not guarantee the effectiveness of this software and are not responsible for any inaccuracies or errors that may occur. By downloading or using this software, you agree to these terms and conditions.
 
 TERMS AND CONDITIONS: 
-By downloading, installing, or using the software, you agree to be bound by these Terms and Conditions. If you do not agree to these Terms and Conditions, do not download, install or use the software.
+    By downloading, installing, or using the software, you agree to be bound by these Terms and Conditions. If you do not agree to these Terms and Conditions, do not download, install or use the software.
 
     Use of the Software
     The software is intended for educational and research purposes only. It is designed to bypass ChatGPT's detection system, but it is your responsibility to use it in a lawful and ethical manner.
