@@ -56,7 +56,9 @@ app.get("/favicon.ico", async function (req, res) {
   res.sendFile(path.join(__dirname, `/views/favicon.ico`));
 })
 
-
+app.get("/logo.png", async function (req, res) {
+  res.sendFile(path.join(__dirname, `/views/logo.png`));
+})
 
 
 app.listen(port, () => {
