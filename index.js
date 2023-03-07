@@ -52,6 +52,10 @@ app.get('/test', async function (req, res) {
 
 })
 
+app.get('/font', async function (req, res) {
+  res.sendFile(path.join(__dirname, `/views/fonts/boxy-bold.ttf`));
+})
+
 app.get("/favicon.ico", async function (req, res) {
   res.sendFile(path.join(__dirname, `/views/favicon.ico`));
 })

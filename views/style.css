@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
 
+@font-face {
+  font-family: 'boxy';
+  src: url('/font') format('truetype'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}  
+
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   color: #aca49c;
   font-size: 0.875em;
@@ -75,7 +80,7 @@ input:hover:focus::-ms-placeholder, textarea:hover::focus:-ms-placeholder {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'boxy';
   background: #e2dedb;
   color: #b3aca7;
 }
@@ -84,6 +89,7 @@ header {
   position: relative;
   margin: 100px 0 25px 0;
   font-size: 2.3em;
+  font-family: 'boxy';
   text-align: center;
   letter-spacing: 1px;
 }
@@ -95,7 +101,7 @@ header {
 }
 
 input {
-  font-family: 'Lato', sans-serif;
+  font-family: 'boxy';
   font-size: 0.875em;
   width: 470px;
   height: 50px;
@@ -119,7 +125,7 @@ input:hover {
   color: #e2dedb;
 }
 #ctc{
-  font-family: 'Lato', sans-serif;
+  font-family: 'boxy';
   font-size: 0.875em;
   width: 150px;
   height: 50px;
@@ -153,7 +159,7 @@ textarea {
   outline: none;
   
   color: #726659;
-  font-family: 'Lato', sans-serif;
+  font-family: 'boxy';
   font-size: 0.875em;
   
   border: solid 1px #b3aca7;
@@ -173,7 +179,7 @@ textarea {
   outline: none;
   
   color: #726659;
-  font-family: 'Lato', sans-serif;
+  font-family: 'boxy';
   font-size: 0.875em;
   
   border: solid 1px #b3aca7;
@@ -196,7 +202,7 @@ textarea:hover {
   padding: 0;
   margin: -5px 0px 0px 0px;
   
-  font-family: 'Lato', sans-serif;
+  font-family: 'boxy';
   font-size: 0.875em;
   color: #b3aca7;
   
