@@ -80,7 +80,7 @@ input:hover:focus::-ms-placeholder, textarea:hover::focus:-ms-placeholder {
 }
 
 body {
-  font-family: 'boxy';
+  font-family: 'Lato';
   background: #e2dedb;
   color: #b3aca7;
 }
@@ -89,7 +89,7 @@ header {
   position: relative;
   margin: 100px 0 25px 0;
   font-size: 2.3em;
-  font-family: 'boxy';
+  font-family: 'Lato';
   text-align: center;
   letter-spacing: 1px;
 }
@@ -101,7 +101,7 @@ header {
 }
 
 input {
-  font-family: 'boxy';
+  font-family: 'Latos';
   font-size: 0.875em;
   width: 470px;
   height: 50px;
@@ -125,7 +125,7 @@ input:hover {
   color: #e2dedb;
 }
 #ctc{
-  font-family: 'boxy';
+  font-family: 'Lato';
   font-size: 0.875em;
   width: 150px;
   height: 50px;
@@ -159,7 +159,7 @@ textarea {
   outline: none;
   
   color: #726659;
-  font-family: 'boxy';
+  font-family: 'Lato';
   font-size: 0.875em;
   
   border: solid 1px #b3aca7;
@@ -179,7 +179,7 @@ textarea {
   outline: none;
   
   color: #726659;
-  font-family: 'boxy';
+  font-family: 'Lato';
   font-size: 0.875em;
   
   border: solid 1px #b3aca7;
@@ -202,7 +202,7 @@ textarea:hover {
   padding: 0;
   margin: -5px 0px 0px 0px;
   
-  font-family: 'boxy';
+  font-family: 'Lato';
   font-size: 0.875em;
   color: #b3aca7;
   

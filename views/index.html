@@ -76,7 +76,7 @@
 				var dainputText = $('#message').val();
 				const inputText = JSON.stringify(dainputText).replace(/(\r\n|\n|\r)/gm, "");
 				// call the URL with the input text as a parameter
-				div.innerHTML = "loading... (Average generation time is ~5s)";
+				div.innerHTML = "loading... (Average generation time is ~15s)";
 				const results = await axios.post("/api", {
 					text: inputText
 				})
